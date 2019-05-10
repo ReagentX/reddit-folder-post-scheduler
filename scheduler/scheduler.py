@@ -59,4 +59,3 @@ class Scheduler():
             print(submission.permalink)
         
         print('Done!')
-
