@@ -1,3 +1,4 @@
 venv/*
 *.pyc
 reddit_folder_post_scheduler.egg-info/*
+reddit_api/praw.ini
