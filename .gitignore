@@ -1,2 +1,3 @@
 venv/*
 *.pyc
+reddit_folder_post_scheduler.egg-info/*
