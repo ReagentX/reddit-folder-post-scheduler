@@ -14,11 +14,12 @@ def post(sub, title, url):
                 title,
                 url=url
             )
+            break
         except:
             print('Rate limited, retrying in 10 minutes')
             time.sleep(10 * 60)  # 10 minutes
             retries += 1
 
     if result: 
-        return submission
+        return result
     return None
