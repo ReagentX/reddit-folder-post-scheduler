@@ -28,7 +28,7 @@ class Scheduler():
             os.makedirs(name)
 
 
-    def get_or_create_log(self):
+    def get_or_create_log(self) -> list:
         self.create_folder('log')
         used = set()
         with open(self.log_root / 'log.txt', 'r') as f:
@@ -37,7 +37,7 @@ class Scheduler():
         return used
 
 
-    def get_random_image(self):
+    def get_random_image(self) -> str:
         choice = random.choice(self.files)
         with open(self.log_root / 'log.txt', 'a') as f:
             print(f'Logging {choice}')
@@ -45,17 +45,20 @@ class Scheduler():
         return choice
 
     
-    def make_posts(self):
+    def make_posts(self) -> None:
         image = self.get_random_image()
         path = self.root / image
         title = image.split('.')[0]
-        
+
         # Upload to Imgur
         url = self.imgur.post_image(path, title)
-        
+
         # Submit to Reddit
         for sub in self.subreddits:
             submission = submit.post(sub, title, url)
-            print(submission.permalink)
-        
+            print(f'https://old.reddit.com{submission.permalink}')
+
         print('Done!')
+
+    def __repr__(self):
+        return f'Scheduler object\n{len(self.files)} choices\n{len(self.subreddits)} subreddits'
