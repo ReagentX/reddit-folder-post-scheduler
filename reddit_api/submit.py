@@ -1,3 +1,4 @@
+import sys
 import praw
 import time
 
@@ -16,10 +17,14 @@ def post(sub, title, url):
             )
             break
         except:
-            print('Rate limited, retrying in 10 minutes')
-            time.sleep(10 * 60)  # 10 minutes
+            print('Rate limited!')
+            for remaining in range(10 * 60, 0, -1):
+                minutes, seconds = divmod(remaining, 60)
+                sys.stdout.write("\r")
+                sys.stdout.write(f'Sleeping for {minutes}:{seconds:02}')
+                sys.stdout.flush()
+                time.sleep(1)
             retries += 1
-
     if result: 
         return result
     return None
