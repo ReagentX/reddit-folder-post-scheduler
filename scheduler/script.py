@@ -12,6 +12,8 @@ class Scheduler():
         self.log_root = pathlib.Path('log/')
         self.used = self.get_or_create_log()
         self.files = self.get_files_in_dir(dir)
+        if not self.files:
+            raise ValueError('No unused files!')
         self.subreddits = subreddits
         self.imgur = upload.ImgurAPI(imgur_key)
 
