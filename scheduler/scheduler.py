@@ -56,7 +56,7 @@ class Scheduler():
         # Submit to Reddit
         for sub in self.subreddits:
             submission = submit.post(sub, title, url)
-            print(f'https://old.reddit.com{submission.permalink}')
+            print(f'https://old.reddit.com{submission.permalink}', file=open(self.log_root / 'links.txt', 'a'))
 
         print('Done!')
 
