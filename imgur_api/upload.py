@@ -5,7 +5,6 @@ API_ROOT = 'https://api.imgur.com/3/'
 
 class ImgurAPI():
     def __init__(self, client_id):
-        client_id = client_id
         self.headers = {
             'Authorization': f'Client-ID {client_id}'
         }
