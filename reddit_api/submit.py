@@ -1,7 +1,6 @@
 import praw
-import os
 
-print(os.getcwd())
+
 reddit = praw.Reddit('bot')
 
 
