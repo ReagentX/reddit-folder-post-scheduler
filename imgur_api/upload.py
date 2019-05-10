@@ -1,5 +1,6 @@
 import json
 import requests
+import pathlib
 
 API_ROOT = 'https://api.imgur.com/3/'
 
@@ -10,7 +11,9 @@ class ImgurAPI():
         }
 
 
-    def post_image(self, image, title):
+    def post_image(self, image_path: pathlib.Path, title: str):
+        with open(image_path, 'rb') as f:
+            image = f.read()
         body = {
             'image': image,
             'type': 'file',

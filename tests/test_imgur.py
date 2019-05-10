@@ -7,13 +7,11 @@ from imgur_api import upload
 class TestImgurMethods(unittest.TestCase):
 
     imgur = upload.ImgurAPI('')
-    base_path = pathlib.Path('tests/')
 
 
     def test_upload(self):
-        with open(f'{self.base_path}/image.png', "rb") as f:
-            image = f.read()
-        link = self.imgur.post_image(image, 'test post')
+        image_path = pathlib.Path('tests/image.png')
+        link = self.imgur.post_image(image_path, 'test post')
         self.assertIsNotNone(link)
 
 
