@@ -6,7 +6,7 @@ setup(
     description='A Python 3 API to schedule image posts from a folder of images',
     author='Christopher Sardegna',
     author_email='github@reagentx.net',
-    install_requires=['requests'],
+    install_requires=['requests', 'praw'],
     packages=find_packages(),
     scripts=[]
 )
