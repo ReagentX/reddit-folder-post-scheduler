@@ -19,16 +19,18 @@ class Scheduler():
 
 
     def get_files_in_dir(self, dir: pathlib.Path) -> list:
+        """Returns a list of unused files, i.e. files not named in `log.txt`"""
         return [filename for filename in os.listdir(dir) if filename not in self.used]
 
     
     def create_folder(self, name) -> None:
-        '''Create user folder to download files into'''
+        '''Create folder if folder does not exist'''
         if not os.path.exists(name):
             os.makedirs(name)
 
 
-    def get_or_create_log(self) -> list:
+    def get_or_create_log(self) -> set:
+        """Gets the data from `log.txt` (or creates it if the file does not exist"""
         self.create_folder('log')
         used = set()
         with open(self.log_root / 'log.txt', 'r') as f:
@@ -38,6 +40,7 @@ class Scheduler():
 
 
     def get_random_image(self) -> str:
+        """Chooses a random file from the files list, logs it, and returns the name"""
         choice = random.choice(self.files)
         with open(self.log_root / 'log.txt', 'a') as f:
             print(f'Logging {choice}')
@@ -46,14 +49,15 @@ class Scheduler():
 
     
     def make_posts(self) -> None:
+        """Get a random unused image, upload to Imgur, post to Reddit"""
         image = self.get_random_image()
         path = self.root / image
         title = image.split('.')[0]
 
-        # Upload to Imgur
+        # Upload to Imgur, get the URL
         url = self.imgur.post_image(path, title)
 
-        # Submit to Reddit
+        # Submit URL to Reddit
         for sub in self.subreddits:
             submission = submit.post(sub, title, url)
             print(f'https://old.reddit.com{submission.permalink}', file=open(self.log_root / 'links.txt', 'a'))
