@@ -24,7 +24,7 @@ class Scheduler():
 
     
     def create_folder(self, name) -> None:
-        '''Create folder if folder does not exist'''
+        """Create folder if folder does not exist"""
         if not os.path.exists(name):
             os.makedirs(name)
 
