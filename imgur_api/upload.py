@@ -11,7 +11,8 @@ class ImgurAPI():
         }
 
 
-    def post_image(self, image_path: pathlib.Path, title: str):
+    def post_image(self, image_path: pathlib.Path, title: str) -> str:
+        """POSTs an image file to the Imgur API; returns the upload's URL"""
         with open(image_path, 'rb') as f:
             image = f.read()
         body = {
@@ -25,7 +26,6 @@ class ImgurAPI():
 
         url = f'{API_ROOT}/upload'
         response = requests.post(url, data=body, headers=self.headers)
-        print(response)
         if response.json():
             return response.json()['data']['link']
         else:
