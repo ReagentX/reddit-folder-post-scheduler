@@ -1,7 +1,7 @@
 import sys
-import praw
 import time
 
+import praw
 
 reddit = praw.Reddit('bot')
 

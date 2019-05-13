@@ -1,6 +1,7 @@
 import os
 import pathlib
 import unittest
+
 from imgur_api import upload
 
 

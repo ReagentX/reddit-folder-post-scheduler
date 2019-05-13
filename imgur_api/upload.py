@@ -1,6 +1,7 @@
 import json
-import requests
 import pathlib
+
+import requests
 
 API_ROOT = 'https://api.imgur.com/3/'
 
