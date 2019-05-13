@@ -3,13 +3,15 @@ import pathlib
 
 import requests
 
-API_ROOT = 'https://api.imgur.com/3/'
+
 
 class ImgurAPI():
     def __init__(self, client_id):
         self.headers = {
             'Authorization': f'Client-ID {client_id}'
         }
+        self.log_root = pathlib.Path('log')
+        self.api_root = 'https://api.imgur.com/3/'
 
 
     def post_image(self, image_path: pathlib.Path, title: str) -> str:
@@ -25,9 +27,16 @@ class ImgurAPI():
             'disable_audio': 1
         }
 
-        url = f'{API_ROOT}/upload'
+        url = f'{self.api_root}/upload'
         response = requests.post(url, data=body, headers=self.headers)
         if response.json():
-            return response.json()['data']['link']
+            link = response.json()['data']['link']
+            deletehash = response.json()['data']['deletehash']
+
+            # Log link and deletehash so we can remove anonymous uploads
+            with open(self.log_root / 'image.txt', 'a') as f:
+                print(f'Logging {link}')
+                f.write(f'{link}|{deletehash}\n')
+            return link, deletehash
         else:
             return None

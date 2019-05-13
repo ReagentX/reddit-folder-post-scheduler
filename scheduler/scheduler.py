@@ -55,7 +55,7 @@ class Scheduler():
         title = image.split('.')[0]
 
         # Upload to Imgur, get the URL
-        url = self.imgur.post_image(path, title)
+        url, deletehash = self.imgur.post_image(path, title)
 
         # Submit URL to Reddit
         for sub in self.subreddits:
