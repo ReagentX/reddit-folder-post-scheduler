@@ -12,8 +12,10 @@ class TestImgurMethods(unittest.TestCase):
         """Upload a sample image to Imgur, make sure we get a link"""
         imgur = upload.ImgurAPI('')
         image_path = pathlib.Path('tests/image.png')
-        link = imgur.post_image(image_path, 'test post')
+        link, deletehash = imgur.post_image(image_path, 'test post')
         self.assertIsNotNone(link)
+        deleted = imgur.delete_image(deletehash)
+        self.assertIsNotNone(deleted)
 
 
 if __name__ == "__main__":
