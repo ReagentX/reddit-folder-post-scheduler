@@ -40,3 +40,9 @@ class ImgurAPI():
             return link, deletehash
         else:
             return None
+
+
+    def delete_image(self, deletehash: str):
+        url = f'{self.api_root}/image/{deletehash}'
+        response = requests.delete(url, headers=self.headers)
+        return response if response else None
