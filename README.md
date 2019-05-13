@@ -37,7 +37,9 @@ s.make_posts()
 
 To "set-it-and-forget-it," install the package on a machine that is always online (i.e. a VPS or even a Raspberry Pi on your network) and use `cron`:
 
-    0 12 * * * cd Projects/reddit-folder-post-scheduler/ && . venv/bin/activate && python scripts/script.py
+```bash
+0 12 * * * cd Projects/reddit-folder-post-scheduler/ && . venv/bin/activate && python scripts/script.py
+```
 
 ## Notes
 
