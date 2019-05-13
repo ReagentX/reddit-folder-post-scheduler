@@ -1,6 +1,7 @@
 import os
 import pathlib
 import unittest
+
 from reddit_api import submit
 
 
