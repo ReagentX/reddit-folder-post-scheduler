@@ -14,13 +14,15 @@ The core of this program is the Scheduler object, which is constructed with a `p
 
 This will create a scheduler object that looks in the directory `/Users/chris/Pics/Dir-Of-Photos/` and post it to the subs `['sub_1', 'sub_2', 'sub_3', 'sub_4']`.
 
-    from pathlib import Path
-    s = scheduler.Scheduler(
-        Path('/Users/chris/Pics/Dir-Of-Photos'),
-        ['sub_1', 'sub_2', 'sub_3', 'sub_4'],
-        'imgur_client_id'
-    )
-    s.make_posts()
+```python
+from pathlib import Path
+s = scheduler.Scheduler(
+    Path('/Users/chris/Pics/Dir-Of-Photos'),
+    ['sub_1', 'sub_2', 'sub_3', 'sub_4'],
+    'imgur_client_id'
+)
+s.make_posts()
+```
 
 ## Setup
 
