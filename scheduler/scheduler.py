@@ -61,12 +61,12 @@ class Scheduler():
             for sub in self.subreddits:
                 submission = submit.post(sub, title, url)
                 print(f'https://old.reddit.com{submission.permalink}', file=open(self.log_root / 'links.txt', 'a'))
-            else:
-                thumb = submit.get_first_frame(path)
-                for sub in self.subreddits:
-                    submission = submit.post_video(sub, title, path)
-                    print(f'https://old.reddit.com{submission.permalink}', file=open(self.log_root / 'links.txt', 'a'))
-                os.remove(thumb)
+        else:
+            thumb = submit.get_first_frame(path)
+            for sub in self.subreddits:
+                submission = submit.post_video(sub, title, path)
+                print(f'https://old.reddit.com{submission.permalink}', file=open(self.log_root / 'links.txt', 'a'))
+            os.remove(thumb)
 
         print('Done!')
 
