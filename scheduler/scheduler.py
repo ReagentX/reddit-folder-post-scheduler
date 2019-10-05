@@ -55,12 +55,18 @@ class Scheduler():
         title = image.split('.')[0]
 
         # Upload to Imgur, get the URL
-        url, deletehash = self.imgur.post_image(path, title)
-
-        # Submit URL to Reddit
-        for sub in self.subreddits:
-            submission = submit.post(sub, title, url)
-            print(f'https://old.reddit.com{submission.permalink}', file=open(self.log_root / 'links.txt', 'a'))
+        if image.endswith('png'):
+            url, deletehash = self.imgur.post_image(path, title)
+            # Submit URL to Reddit
+            for sub in self.subreddits:
+                submission = submit.post(sub, title, url)
+                print(f'https://old.reddit.com{submission.permalink}', file=open(self.log_root / 'links.txt', 'a'))
+            else:
+                thumb = submit.get_first_frame(path)
+                for sub in self.subreddits:
+                    submission = submit.post_video(sub, title, path)
+                    print(f'https://old.reddit.com{submission.permalink}', file=open(self.log_root / 'links.txt', 'a'))
+                os.remove(thumb)
 
         print('Done!')
 
